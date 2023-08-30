@@ -1,26 +1,74 @@
-#  Как работать с репозиторием финального задания
+[![Main Kittygram workflow](https://github.com/slavajet/kittygram_final/actions/workflows/main.yml/badge.svg)](https://github.com/slavajet/kittygram_final/actions/workflows/main.yml)
 
-## Что нужно сделать
+## Проект KittyGram
 
-Настроить запуск проекта Kittygram в контейнерах и CI/CD с помощью GitHub Actions
+KittyGram - это веб-приложение для обмена фотографиями и изображениями котиков. Пользователи могут регистрироваться, загружать свои фотографии котиков, просматривать фотографии других пользователей.
 
-## Как проверить работу с помощью автотестов
+### Функциональность
 
-В корне репозитория создайте файл tests.yml со следующим содержимым:
-```yaml
-repo_owner: ваш_логин_на_гитхабе
-kittygram_domain: полная ссылка (https://доменное_имя) на ваш проект Kittygram
-taski_domain: полная ссылка (https://доменное_имя) на ваш проект Taski
-dockerhub_username: ваш_логин_на_докерхабе
-```
+- Регистрация и аутентификация пользователей.
+- Загрузка и просмотр фотографий котиков.
 
-Скопируйте содержимое файла `.github/workflows/main.yml` в файл `kittygram_workflow.yml` в корневой директории проекта.
+## Стек
 
-Для локального запуска тестов создайте виртуальное окружение, установите в него зависимости из backend/requirements.txt и запустите в корневой директории проекта `pytest`.
+- Фронтенд: HTML, CSS, JavaScript, React
+- Бэкенд: Python, Django
+- База данных: PostgreSQL
+- Веб-сервер: Nginx
+- Контейнеризация: Docker
 
-## Чек-лист для проверки перед отправкой задания
+## Локальное развертывание
 
-- Проект Taski доступен по доменному имени, указанному в `tests.yml`.
-- Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
-- Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
-- В корне проекта есть файл `kittygram_workflow.yml`.
+1. Установите Docker на вашем компьютере.
+
+2. Склонируйте репозиторий проекта: `git clone https://github.com/slavajet/kittygram_final.git
+
+3. Перейдите в папку проекта: `cd kittygram`
+
+4. Создайте файл `.env` и укажите необходимые переменные окружения, например:
+    ```env
+    POSTGRES_DB=kittygramdb
+    POSTGRES_USER=kittygramuser
+    POSTGRES_PASSWORD=kittygrampassword
+    DB_HOST=db
+    DB_PORT=5432
+    MY_SECRET_KEY='your-secret-key-here'
+    ALLOWED_HOSTS=your-domain-or-ip-here,localhost,127.0.0.1
+    DEBUG=True
+    ```
+5. Запустите проект с помощью Docker Compose: `docker-compose up -d`
+
+## Развертывание на сервере
+
+1. Установите Docker и Docker Compose на вашем сервере, следуя инструкциям для вашей операционной системы.
+2. Склонируйте репозиторий проекта:
+    ```
+    git clone https://github.com/slavajet/kittygram_final.git
+    ```
+3. Перейдите в папку проекта:
+    ```
+    cd kittygram_final
+    ```
+4. Создайте файл `.env` в корневой папке проекта и укажите необходимые переменные окружения, например:
+    ```env
+    POSTGRES_DB=kittygramdb
+    POSTGRES_USER=kittygramuser
+    POSTGRES_PASSWORD=kittygrampassword
+    DB_HOST=db
+    DB_PORT=5432
+    MY_SECRET_KEY='your-secret-key-here'
+    ALLOWED_HOSTS=your-domain-or-ip-here,localhost,127.0.0.1
+    DEBUG=False
+    ```
+
+5. Запустите проект с помощью Docker Compose Production:
+
+    ```bash
+    docker-compose.productions up -d
+    ```
+
+## Автор
+
+Проект разработан [Slava Jet](https://github.com/slavajet).
+
+Связаться со мной можно по электронной почте: your.slavacaas@yandex.ru

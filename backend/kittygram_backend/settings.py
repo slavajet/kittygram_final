@@ -1,11 +1,20 @@
 import os
 from pathlib import Path
+from distutils.util import strtobool
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('MY_SECRET_KEY', ' ')
 
-DEBUG = False
+DEBUG = bool(strtobool(os.getenv('DEBUG', 'False')))
+
+if DEBUG:
+    print("Debug mode is active.")
+else:
+    print("Normal mode.")
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ' ').split(',')
 
@@ -54,12 +63,12 @@ WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'django'),
+        'ENGINE': 'django.db.backends.sqlite3' if DEBUG else 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB', 'django') if not DEBUG else BASE_DIR / 'db.sqlite3',
         'USER': os.getenv('POSTGRES_USER', 'django'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
         'HOST': os.getenv('DB_HOST', ''),
-        'PORT': os.getenv('DB_PORT', 5432)
+        'PORT': os.getenv('DB_PORT', 5432),
     }
 }
 
@@ -80,7 +89,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
