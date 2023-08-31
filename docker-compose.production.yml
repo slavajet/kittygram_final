@@ -18,6 +18,8 @@ services:
     volumes:
       - static_volume:/backend_static
       - media_volume:/media
+    depends_on:
+      - db
 
   frontend:
     image: slvajet/kittygram_frontend
@@ -34,3 +36,6 @@ services:
       - media_volume:/media
     ports:
       - 9000:80
+    depends_on:
+      - backend
+      - frontend

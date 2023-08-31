@@ -12,11 +12,6 @@ SECRET_KEY = os.getenv('MY_SECRET_KEY', ' ')
 
 DEBUG = bool(strtobool(os.getenv('DEBUG', 'False')))
 
-if DEBUG:
-    print("Debug mode is active.")
-else:
-    print("Normal mode.")
-
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', ' ').split(',')
 
 INSTALLED_APPS = [
